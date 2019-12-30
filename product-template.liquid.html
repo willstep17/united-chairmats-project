@@ -153,13 +153,15 @@
                 </div>
                 {% endif %}
 
-                <!-- Where Custom Measurement Validation Scripts will prompt user to make required changes to measurements -->
+<!-- Where Custom Measurement Validation Scripts will prompt user to make required changes to measurements -->
 
                 {% if product.tags contains 'Custom' %}
-                <h3 style="color: red;">This is where the user will be prompted to make necessary changes before submitting to cart.</h1>
-                    {% endif %}
+                <div id="validate-script-user-prompt">
+                    <!-- User will be prompted here by elements loaded from validate files -->
+                <div>
+                {% endif %}
 
-                    <!-- END Where Custom Measurement Validation Scripts will prompt user to make required changes to measurements -->
+<!-- END Where Custom Measurement Validation Scripts will prompt user to make required changes to measurements -->
 
                     <div class="product-form__item product-form__item--submit">
                         <button type="submit" name="add" id="AddToCart-{{ section.id }}" {% unless current_variant.available %}disabled="disabled"{% endunless %} class="btn product-form__cart-submit{% if product.options.size == 1 and product.variants[0].title == 'Default Title' %} product-form__cart-submit--small{% endif %}">
@@ -185,17 +187,17 @@
             {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
             {% endif %}
 
-            <!-- Passes product tags to front end for Custom Measurement Validation Scripts -->
+<!-- Passes product tags to front end for Custom Measurement Validation Scripts -->
 
             {% if product.tags contains 'Custom' %}
-            <ul id="product-tags" hidden>
-                {% for tag in product.tags %}
-                <li class="product-tag-handle" hidden>{{tag}}</li>
-                {% endfor %}
+                <ul id="product-tags" hidden>
+                    {% for tag in product.tags %}
+                        <li class="product-tag-handle" hidden>{{tag}}</li>
+                    {% endfor %}
                 <ul>
-                    {% endif %}
+            {% endif %}
 
-                    <!-- END Passes product tags to front end for Custom Measurement Validation Scripts -->
+<!-- END Passes product tags to front end for Custom Measurement Validation Scripts -->
 
         </div>
     </div>

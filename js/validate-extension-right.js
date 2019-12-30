@@ -1,7 +1,7 @@
 (function(){
 
-    /* submitButton constant */
     const submitButton = document.getElementById("AddToCart-product-template");
+    const userPrompt = document.getElementById("validate-script-user-prompt");
 
     /*Pull product tags from hidden elements with class name ["product-tag-handle"]
     and parses them into two axis dimension for the mat [axisDimensions] */
@@ -39,6 +39,7 @@
     chairmat.determineAxes(axesDimensions);
 
     console.log(submitButton);
+    console.log(userPrompt);
     console.log(chairmat);
     console.log("Hello from validate-extension-right.js");
 
