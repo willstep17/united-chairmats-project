@@ -38,9 +38,26 @@
     };
     chairmat.determineAxes(axesDimensions);
 
+    let sideA = getFirstElementByName("properties[Side A]");
+    console.log(sideA);
+//     sideA.addEventListener("change", function(){
+//         chairmat.sides[0] = sideA.value;
+//         // validateDimensions();
+//       console.log(chairmat);
+//     });
+
     console.log(submitButton);
     console.log(userPrompt);
     console.log(chairmat);
     console.log("Hello from validate-extension-right.js");
+
+    function getFirstElementByName(elementName) {
+        let elements = document.getElementsByName(elementName);
+  	if(elements.length) {
+    	return elements[0];
+  	} else {
+    	return undefined;
+  	}
+}
 
 }());

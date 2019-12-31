@@ -20,6 +20,7 @@
         largeAxisMax: "",
         smallAxisMax: "",
         sides: [
+            //Sides Correspond to position in array. Exe: A=[0] B=[1] C=[2]
             "","","","","","","","","",
         ],
         determineAxes: function(dimensions) {
