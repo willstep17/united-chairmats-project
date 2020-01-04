@@ -15,7 +15,7 @@ VIG.registerSelectChange = function()
     //so we have to check very 500ms and compare the values, this is the not so
     //elegant part.
 
-    if(variantSelect != undefined) {
+    if(variantSelect != undefined)
         console.log("variantSelect found. Registering change event.");
         var lastVal = variantSelect.val();
 
