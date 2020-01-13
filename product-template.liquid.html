@@ -294,7 +294,7 @@
 {% endif %}
 
 {% if product.tags contains 'Custom' and product.tags contains 'Extension' and product.tags contains 'Left' %}
-{{ 'validate-extension-left.js' | asset_url | script_tag }}
+{{ 'validate-extension.js' | asset_url | script_tag }}
 {% endif %}
 
 {% if product.tags contains 'Custom' and product.tags contains 'Modular' and product.tags contains 'Right' %}

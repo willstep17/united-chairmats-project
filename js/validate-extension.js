@@ -90,9 +90,7 @@
                 }
                 submitButton.attr("disabled", true);
                 let HTMLString = '';
-                console.log("All measurements accepted. Running validation.");
                 if(!chairmat.isSquare) {
-                    console.log("Chairmat is not square.");
                     if(parseInt(chairmat.sides[0]) > parseInt(chairmat.smallAxisMax) &&
                         parseInt(chairmat.sides[1]) > parseInt(chairmat.smallAxisMax)) {
                         userPrompt.empty();
