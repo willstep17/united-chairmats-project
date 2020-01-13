@@ -137,13 +137,13 @@
                     userPrompt.append(HTMLString);
                     return;
                 }
-                if(parseInt(chairmat.sides[6]) + parseInt(chairmat.sides[8]) !== parseInt(chairmat.sides[0])) {
+                if(parseInt(chairmat.sides[3]) + parseInt(chairmat.sides[5]) + parseInt(chairmat.sides[7]) !== parseInt(chairmat.sides[1])) {
                     userPrompt.empty();
-                    HTMLString = "<p style='color: red; font-weight: bold;'>The sum of Side G + Side I must equal the measurement of Side A</p>" +
+                    HTMLString = "<p style='color: red; font-weight: bold;'>The sum of Side D + Side F + Side H must equal the measurement of Side B</p>" +
                         "<p>Currently: </p>" +
-                        "<p>Side B = " + chairmat.sides[0] + "</p>" +
-                        "<p>Side G (" + chairmat.sides[6] + ") + Side I (" + chairmat.sides[8] + ") = " +
-                        (parseInt(chairmat.sides[6]) + parseInt(chairmat.sides[8])) + "</p><br />";
+                        "<p>Side D (" + chairmat.sides[3] + ") + Side F (" + chairmat.sides[5] + ") + Side H (" + chairmat.sides[7] + ") = " +
+                        (parseInt(chairmat.sides[3]) + parseInt(chairmat.sides[5]) + parseInt(chairmat.sides[7])) + "</p>" +
+                        "<p>Side B = " + chairmat.sides[1] + "</p><br />";
                     userPrompt.append(HTMLString);
                     return;
                 }
