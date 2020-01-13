@@ -4,14 +4,12 @@
     $(document).ready( function(){
         setTimeout(function(){
 
-            console.log("Running script.");
-
             const submitButton = $("#AddToCart-product-template");
             const userPrompt = $("#validate-script-user-prompt");
 
             /*Pull product tags from hidden elements with class name ["product-tag-handle"]
             and parses them into two axis dimension for the mat [axisDimensions] */
-            let tags = document.getElementsByClassName("product-tag-handle");
+            let tags = $(".product-tag-handle");
             let tagsArray = [];
             for(let i=0;i<tags.length;i++) {
                 tagsArray.push(tags[i].textContent);
@@ -95,7 +93,7 @@
                         parseInt(chairmat.sides[1]) > parseInt(chairmat.smallAxisMax)) {
                         userPrompt.empty();
                         HTMLString = "<p style='color: red; font-weight: bold;'>Side A and B cannot both be larger than " + chairmat.smallAxisMax + ".</p><br />" +
-                            "<p></p>";
+                        "<p></p>";
                         userPrompt.append(HTMLString);
                         return;
                     }
@@ -104,9 +102,9 @@
                     userPrompt.empty();
                     HTMLString = "<p style='color: red; font-weight: bold;'>The sum of Side C + Side E must equal the measurement of Side B</p>" +
                         "<p>Currently: </p>" +
-                        "<p>Side B = " + chairmat.sides[1] + "</p>" +
                         "<p>Side C (" + chairmat.sides[2] + ") + Side E (" + chairmat.sides[4] + ") = " +
-                        (parseInt(chairmat.sides[2]) + parseInt(chairmat.sides[4])) + "</p><br />";
+                        (parseInt(chairmat.sides[2]) + parseInt(chairmat.sides[4])) + "</p>" +
+                        "<p>Side B = " + chairmat.sides[1] + "</p><br />";
                     userPrompt.append(HTMLString);
                     return;
                 }
@@ -114,9 +112,9 @@
                     userPrompt.empty();
                     HTMLString = "<p style='color: red; font-weight: bold;'>The sum of Side D + Side F must equal the measurement of Side A</p>" +
                         "<p>Currently: </p>" +
-                        "<p>Side A = " + chairmat.sides[0] + "</p>" +
                         "<p>Side D (" + chairmat.sides[3] + ") + Side F (" + chairmat.sides[5] + ") = " +
-                        (parseInt(chairmat.sides[3]) + parseInt(chairmat.sides[5])) + "</p><br />";
+                        (parseInt(chairmat.sides[3]) + parseInt(chairmat.sides[5])) + "</p>" +
+                        "<p>Side A = " + chairmat.sides[0] + "</p><br />";
                     userPrompt.append(HTMLString);
                     return;
                 }
