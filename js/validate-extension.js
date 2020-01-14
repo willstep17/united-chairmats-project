@@ -88,6 +88,7 @@
                     }
                 }
                 let errorMessage = generateErrorMessage(inputChairmat);
+
                 submitButton.attr("disabled", true);
                 let HTMLString = '';
                 if(!inputChairmat.isSquare) {
@@ -110,9 +111,9 @@
                         errorMessage +
                         "<h4 class='error-heading'>The sum of Side C + Side E must equal the measurement of Side B</h4>" +
                         "<p>Currently: </p>" +
-                        "<p>Side C (" + inputChairmat.sides[2] + ") + Side E (" + inputChairmat.sides[4] + ") = " +
-                        (parseInt(inputChairmat.sides[2]) + parseInt(inputChairmat.sides[4])) + "</p>" +
-                        "<p>Side B = " + inputChairmat.sides[1] + "</p></div>";
+                        "<p>Side C (" + inputChairmat.sides[2] + ") + Side E (" + inputChairmat.sides[4] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[2]) + parseInt(inputChairmat.sides[4])) + "</b></p>" +
+                        "<p>Side B = <b>" + inputChairmat.sides[1] + "</b></p></div>";
                     userPrompt.append(HTMLString);
                     return;
                 }
@@ -122,9 +123,9 @@
                         errorMessage +
                         "<h4 class='error-heading'>The sum of Side D + Side F must equal the measurement of Side A</h4>" +
                         "<p>Currently: </p>" +
-                        "<p>Side D (" + inputChairmat.sides[3] + ") + Side F (" + inputChairmat.sides[5] + ") = " +
-                        (parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5])) + "</p>" +
-                        "<p>Side A = " + inputChairmat.sides[0] + "</p></div>";
+                        "<p>Side D (" + inputChairmat.sides[3] + ") + Side F (" + inputChairmat.sides[5] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5])) + "</b></p>" +
+                        "<p>Side A = <b>" + inputChairmat.sides[0] + "</b></p></div>";
                     userPrompt.append(HTMLString);
                     return;
                 }
@@ -138,7 +139,7 @@
                     numberOfErrors++;
                 }
                 if(parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5]) !== parseInt(inputChairmat.sides[0])) {
-                    numberOfErrors++
+                    numberOfErrors++;
                 }
                 if(numberOfErrors <= 1) {
                     return "<p>Thanks for filling out your measurements! You're almost done, but <b>before we can activate the cart button</b>, we need your help to fix an error " +
