@@ -1,0 +1,22 @@
+/* Validation Project Custom CSS */
+
+#validate-user-prompt {
+    width: 100%;
+}
+
+.error-box {
+    border: 2px solid red;
+    background-color: #f4dfdf;
+    padding: 10px 10px;
+    margin: 0 5px;
+}
+
+.error-heading {
+    float: left;
+    color: red;
+
+}
+
+.error-content {
+    float: left;
+}
