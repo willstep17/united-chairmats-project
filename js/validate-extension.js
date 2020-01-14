@@ -88,7 +88,6 @@
                     }
                 }
                 let errorMessage = generateErrorMessage(inputChairmat);
-
                 submitButton.attr("disabled", true);
                 let HTMLString = '';
                 if(!inputChairmat.isSquare) {
