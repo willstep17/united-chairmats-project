@@ -1,0 +1,16 @@
+<!-- Where Custom Measurement Validation Scripts will prompt user to make required changes to measurements -->
+{% if product.tags contains 'Custom' %}
+<div id="validate-user-prompt">
+</div>
+{% endif %}
+<!-- END Where Custom Measurement Validation Scripts will prompt user to make required changes to measurements -->
+
+<!-- Passes product tags to front end for Custom Measurement Validation Scripts -->
+{% if product.tags contains 'Custom' %}
+<ul id="product-tags" hidden>
+    {% for tag in product.tags %}
+    <li class="product-tag-handle" hidden>{{tag}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<!-- END Passes product tags to front end for Custom Measurement Validation Scripts -->
