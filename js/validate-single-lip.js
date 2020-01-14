@@ -5,7 +5,9 @@
         setTimeout(function(){
 
             const submitButton = $("#AddToCart-product-template");
-            const userPrompt = $("#validate-script-user-prompt");
+
+            const topUserPrompt = $("#validate-user-prompt-top");
+            const bottomUserPrompt = $("#validate-user-prompt-bottom");
 
             /*Pull product tags from hidden elements with class name ["product-tag-handle"]
             and parses them into two axis dimension for the mat [axisDimensions] */
@@ -111,8 +113,8 @@
                         parseInt(chairmat.sides[1]) > parseInt(chairmat.smallAxisMax)) {
                         userPrompt.empty();
                         HTMLString = "<p style='color: red; font-weight: bold;'>Side A and B cannot both be larger than " + chairmat.smallAxisMax + ".</p><br />" +
-                        "<p></p>";
-                        userPrompt.append(HTMLString);
+                            "<p></p>";
+                        bottomUserPrompt.append(HTMLString);
                         return;
                     }
                 }
@@ -123,7 +125,7 @@
                         "<p>Side G (" + chairmat.sides[6] + ") + Side I (" + chairmat.sides[8] + ") = " +
                         (parseInt(chairmat.sides[6]) + parseInt(chairmat.sides[8])) + "</p>" +
                         "<p>Side A = " + chairmat.sides[0] + "</p><br />";
-                    userPrompt.append(HTMLString);
+                    bottomUserPrompt.append(HTMLString);
                     return;
                 }
                 if(parseInt(chairmat.sides[2]) + parseInt(chairmat.sides[4]) !== parseInt(chairmat.sides[6]) + parseInt(chairmat.sides[8])) {
@@ -144,10 +146,10 @@
                         "<p>Side D (" + chairmat.sides[3] + ") + Side F (" + chairmat.sides[5] + ") + Side H (" + chairmat.sides[7] + ") = " +
                         (parseInt(chairmat.sides[3]) + parseInt(chairmat.sides[5]) + parseInt(chairmat.sides[7])) + "</p>" +
                         "<p>Side B = " + chairmat.sides[1] + "</p><br />";
-                    userPrompt.append(HTMLString);
+                    bottomUserPrompt.append(HTMLString);
                     return;
                 }
-                userPrompt.empty();
+                bottomUserPrompt.empty();
                 submitButton.attr("disabled", false);
             }
 
