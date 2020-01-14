@@ -4,8 +4,6 @@
     $(document).ready( function(){
         setTimeout(function(){
 
-            console.log("Script is running");
-
             const submitButton = $("#AddToCart-product-template");
 
             const userPrompt = $("#validate-user-prompt");
