@@ -89,7 +89,8 @@
                         return;
                     }
                 }
-                let errorMessage = numberOfErrors(inputChairmat);
+                let errorMessage = generateErrorMessage(inputChairmat);
+
                 submitButton.attr("disabled", true);
                 let HTMLString = '';
                 if(!inputChairmat.isSquare) {
@@ -134,7 +135,7 @@
                 submitButton.attr("disabled", false);
             }
 
-            function numberOfErrors(inputChairmat) {
+            function generateErrorMessage(inputChairmat) {
                 let numberOfErrors = 0;
                 if(parseInt(inputChairmat.sides[2]) + parseInt(inputChairmat.sides[4]) !== parseInt(inputChairmat.sides[1])) {
                     numberOfErrors++;
