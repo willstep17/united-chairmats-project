@@ -1,0 +1,35 @@
+<!-- Custom Measurement Validation Scripts -->
+
+{% if product.tags contains 'Custom' %}
+{{ 'jquery-3.4.1.min.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if product.tags contains 'Custom' and product.tags contains 'Single Lip' %}
+{{ 'validate-single-lip.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if product.tags contains 'Custom' and product.tags contains 'Extension' %}
+{{ 'validate-extension.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if product.tags contains 'Custom' and product.tags contains 'Modular' and product.tags contains 'Right' %}
+{{ 'validate-modular-right.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if product.tags contains 'Custom' and product.tags contains 'Modular' and product.tags contains 'Left' %}
+{{ 'validate-modular-left.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if product.tags contains 'Custom' and product.tags contains 'Computer Table' and product.tags contains 'Right' %}
+{{ 'validate-computer-table-right.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if product.tags contains 'Custom' and product.tags contains 'Computer Table' and product.tags contains 'Left' %}
+{{ 'validate-computer-table-left.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if product.tags contains 'Custom' and product.tags contains 'Double Lip' %}
+{{ 'validate-double-lip.js' | asset_url | script_tag }}
+{% endif %}
+
+<!-- END Custom Measurement Validation Scripts -->
