@@ -29,4 +29,4 @@ chairmat.determineAxes(axesDimensions);
 
 console.log(chairmat);
 
-}())
+}());
