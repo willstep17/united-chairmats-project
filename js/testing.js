@@ -27,6 +27,6 @@ const chairmat = {
 
 chairmat.determineAxes(axesDimensions);
 
-console.log(chairmat)
+console.log(chairmat);
 
 }());
