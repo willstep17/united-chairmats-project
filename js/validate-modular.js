@@ -24,7 +24,7 @@
                 largeAxisMax: "",
                 smallAxisMax: "",
                 sides: [
-                    "","","","","","","","","",
+                    "","","","","","","","","","",
                 ],
                 determineAxes: function(dimensions) {
                     if(dimensions[0] === dimensions[1]) {
@@ -96,6 +96,12 @@
                 chairmat.sides[8] = sideI.val();
                 evaluateChairmatDimensions(chairmat);
             });
+            const sideJ = $("[name='properties[Side J]']");
+            chairmat.sides[9] = sideJ.val();
+            sideJ.on("change", function(){
+                chairmat.sides[9] = sideJ.val();
+                evaluateChairmatDimensions(chairmat);
+            });
 
             function evaluateChairmatDimensions(inputChairmat) {
                 for(let i=0;i<inputChairmat.sides.length;i++) {
@@ -121,15 +127,28 @@
                         return;
                     }
                 }
-                if(parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5]) + parseInt(inputChairmat.sides[7]) !== parseInt(inputChairmat.sides[1])) {
+                if(parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5]) !== parseInt(inputChairmat.sides[7]) + parseInt(inputChairmat.sides[9])) {
                     userPrompt.empty();
                     HTMLString = "<div class='error-box'>" +
                         errorMessage +
-                        "<h4 class='error-heading'>The sum of Side D + Side F + Side H must equal the measurement of Side B</h4>" +
+                        "<h4 class='error-heading'>The sum of Side D + Side F must equal the measurement of Side H + Side J</h4>" +
                         "<h4>Currently: </h4>" +
-                        "<h4>Side D (" + inputChairmat.sides[3] + ") + Side F (" + inputChairmat.sides[5] + ") + Side H (" + inputChairmat.sides[7] + ") = <b>" +
-                        (parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5]) + parseInt(inputChairmat.sides[7])) + "</b></h4>" +
-                        "<h4>Side B = <b>" + inputChairmat.sides[1] + "</b></h4></div>";
+                        "<h4>Side D (" + inputChairmat.sides[3] + ") + Side F (" + inputChairmat.sides[5] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5])) + "</b></h4>" +
+                        "<h4>Side H (" + inputChairmat.sides[7] + ") + Side J (" + inputChairmat.sides[9] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[7]) + parseInt(inputChairmat.sides[9])) + "</b></h4></div>";
+                    userPrompt.append(HTMLString);
+                    return;
+                }
+                if(parseInt(inputChairmat.sides[7]) + parseInt(inputChairmat.sides[9]) !== parseInt(inputChairmat.sides[0])) {
+                    userPrompt.empty();
+                    HTMLString = "<div class='error-box'>" +
+                        errorMessage +
+                        "<h4 class='error-heading'>The sum of Side H + Side J must equal the measurement of Side A</h4>" +
+                        "<h4>Currently: </h4>" +
+                        "<h4>Side H (" + inputChairmat.sides[7] + ") + Side J (" + inputChairmat.sides[9] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[7]) + parseInt(inputChairmat.sides[9])) + "</b></h4>" +
+                        "<h4>Side A = <b>" + inputChairmat.sides[0] + "</b></h4></div>";
                     userPrompt.append(HTMLString);
                     return;
                 }
@@ -146,15 +165,15 @@
                     userPrompt.append(HTMLString);
                     return;
                 }
-                if(parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8]) !== parseInt(inputChairmat.sides[0])) {
+                if(parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8]) !== parseInt(inputChairmat.sides[1])) {
                     userPrompt.empty();
                     HTMLString = "<div class='error-box'>" +
                         errorMessage +
-                        "<h4 class='error-heading'>The sum of Side G + Side I must equal the measurement of Side A</h4>" +
+                        "<h4 class='error-heading'>The sum of Side G + Side I must equal the measurement of Side B</h4>" +
                         "<h4>Currently: </h4>" +
                         "<h4>Side G (" + inputChairmat.sides[6] + ") + Side I (" + inputChairmat.sides[8] + ") = <b>" +
                         (parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8])) + "</b></h4>" +
-                        "<h4>Side A = <b>" + inputChairmat.sides[0] + "</b></h4></div>";
+                        "<h4>Side B = <b>" + inputChairmat.sides[1] + "</b></h4></div>";
                     userPrompt.append(HTMLString);
                     return;
                 }
@@ -166,13 +185,16 @@
             //Generates plural or singular error message for side matching
             function generateErrorMessage(inputChairmat) {
                 let numberOfErrors = 0;
-                if(parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5]) + parseInt(inputChairmat.sides[7]) !== parseInt(inputChairmat.sides[1])) {
+                if(parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5]) !== parseInt(inputChairmat.sides[7]) + parseInt(inputChairmat.sides[9])) {
+                    numberOfErrors++;
+                }
+                if(parseInt(inputChairmat.sides[7]) + parseInt(inputChairmat.sides[9]) !== parseInt(inputChairmat.sides[0])) {
                     numberOfErrors++;
                 }
                 if(parseInt(inputChairmat.sides[2]) + parseInt(inputChairmat.sides[4]) !== parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8])) {
                     numberOfErrors++;
                 }
-                if(parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8]) !== parseInt(inputChairmat.sides[0])) {
+                if(parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8]) !== parseInt(inputChairmat.sides[1])) {
                     numberOfErrors++;
                 }
                 if(numberOfErrors <= 1) {

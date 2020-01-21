@@ -79,7 +79,6 @@
                 evaluateChairmatDimensions(chairmat);
             });
 
-
             function evaluateChairmatDimensions(inputChairmat) {
                 for(let i=0;i<inputChairmat.sides.length;i++) {
                     if(inputChairmat.sides[i] === "") {
