@@ -1,13 +1,11 @@
 (function(){
     "use strict";
-
     $(document).ready( function(){
         setTimeout(function(){
 
             const submitButton = $("#AddToCart-product-template");
 
-            const topUserPrompt = $("#validate-user-prompt-top");
-            const bottomUserPrompt = $("#validate-user-prompt-bottom");
+            const userPrompt = $("#validate-user-prompt");
 
             /*Pull product tags from hidden elements with class name ["product-tag-handle"]
             and parses them into two axis dimension for the mat [axisDimensions] */
@@ -99,58 +97,93 @@
                 evaluateChairmatDimensions(chairmat);
             });
 
-
             function evaluateChairmatDimensions(inputChairmat) {
                 for(let i=0;i<inputChairmat.sides.length;i++) {
                     if(inputChairmat.sides[i] === "") {
                         return;
                     }
                 }
+                $(".product-options-errors").hide();
+                let errorMessage = generateErrorMessage(inputChairmat);
                 submitButton.attr("disabled", true);
                 let HTMLString = '';
-                if(!chairmat.isSquare) {
-                    if(parseInt(chairmat.sides[0]) > parseInt(chairmat.smallAxisMax) &&
-                        parseInt(chairmat.sides[1]) > parseInt(chairmat.smallAxisMax)) {
+                if(!inputChairmat.isSquare) {
+                    if(parseInt(inputChairmat.sides[0]) > parseInt(inputChairmat.smallAxisMax) &&
+                        parseInt(inputChairmat.sides[1]) > parseInt(inputChairmat.smallAxisMax)) {
                         userPrompt.empty();
-                        HTMLString = "<p style='color: red; font-weight: bold;'>Side A and B cannot both be larger than " + chairmat.smallAxisMax + ".</p><br />" +
-                            "<p></p>";
-                        bottomUserPrompt.append(HTMLString);
+                        HTMLString = "<div class='error-box'>" +
+                            "<p>Thanks for filling out your measurements! We noticed the overall dimensions of your mat are larger than the " +
+                            "sheet size you selected.  You can either change your measurements to fit within a " + inputChairmat.smallAxisMax + " X " + inputChairmat.largeAxisMax +
+                            " size sheet or, if available, use the same measurements on a larger sheet of raw material.</p>" +
+                            "<h4 class='error-heading'>Sides A and B cannot both be larger than " + inputChairmat.smallAxisMax + ".</h4><br />" +
+                            "<p></p></div>";
+                        userPrompt.append(HTMLString);
                         return;
                     }
                 }
-                if(parseInt(chairmat.sides[6]) + parseInt(chairmat.sides[8]) !== parseInt(chairmat.sides[0])) {
+                if(parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5]) + parseInt(inputChairmat.sides[7]) !== parseInt(inputChairmat.sides[1])) {
                     userPrompt.empty();
-                    HTMLString = "<p style='color: red; font-weight: bold;'>The sum of Side G + Side I must equal the measurement of Side A</p>" +
-                        "<p>Currently: </p>" +
-                        "<p>Side G (" + chairmat.sides[6] + ") + Side I (" + chairmat.sides[8] + ") = " +
-                        (parseInt(chairmat.sides[6]) + parseInt(chairmat.sides[8])) + "</p>" +
-                        "<p>Side A = " + chairmat.sides[0] + "</p><br />";
-                    bottomUserPrompt.append(HTMLString);
-                    return;
-                }
-                if(parseInt(chairmat.sides[2]) + parseInt(chairmat.sides[4]) !== parseInt(chairmat.sides[6]) + parseInt(chairmat.sides[8])) {
-                    userPrompt.empty();
-                    HTMLString = "<p style='color: red; font-weight: bold;'>The sum of Side C + Side E must equal the sum of Side G + Side I</p>" +
-                        "<p>Currently: </p>" +
-                        "<p>Side C (" + chairmat.sides[2] + ") + Side E (" + chairmat.sides[4] + ") = " +
-                        (parseInt(chairmat.sides[2]) + parseInt(chairmat.sides[4])) + "</p>" +
-                        "<p>Side G (" + chairmat.sides[6] + ") + Side I (" + chairmat.sides[8] + ") = " +
-                        (parseInt(chairmat.sides[6]) + parseInt(chairmat.sides[8])) + "</p><br />";
+                    HTMLString = "<div class='error-box'>" +
+                        errorMessage +
+                        "<h4 class='error-heading'>The sum of Side D + Side F + Side H must equal the measurement of Side B</h4>" +
+                        "<h4>Currently: </h4>" +
+                        "<h4>Side D (" + inputChairmat.sides[3] + ") + Side F (" + inputChairmat.sides[5] + ") + Side H (" + inputChairmat.sides[7] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5]) + parseInt(inputChairmat.sides[7])) + "</b></h4>" +
+                        "<h4>Side B = <b>" + inputChairmat.sides[1] + "</b></h4></div>";
                     userPrompt.append(HTMLString);
                     return;
                 }
-                if(parseInt(chairmat.sides[3]) + parseInt(chairmat.sides[5]) + parseInt(chairmat.sides[7]) !== parseInt(chairmat.sides[1])) {
+                if(parseInt(inputChairmat.sides[2]) + parseInt(inputChairmat.sides[4]) !== parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8])) {
                     userPrompt.empty();
-                    HTMLString = "<p style='color: red; font-weight: bold;'>The sum of Side D + Side F + Side H must equal the measurement of Side B</p>" +
-                        "<p>Currently: </p>" +
-                        "<p>Side D (" + chairmat.sides[3] + ") + Side F (" + chairmat.sides[5] + ") + Side H (" + chairmat.sides[7] + ") = " +
-                        (parseInt(chairmat.sides[3]) + parseInt(chairmat.sides[5]) + parseInt(chairmat.sides[7])) + "</p>" +
-                        "<p>Side B = " + chairmat.sides[1] + "</p><br />";
-                    bottomUserPrompt.append(HTMLString);
+                    HTMLString = "<div class='error-box'>" +
+                        errorMessage +
+                        "<h4 class='error-heading'>The sum of Side C + Side E must equal the measurement of Side G + Side I</h4>" +
+                        "<h4>Currently: </h4>" +
+                        "<h4>Side C (" + inputChairmat.sides[2] + ") + Side E (" + inputChairmat.sides[4] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[2]) + parseInt(inputChairmat.sides[4])) + "</b></h4>" +
+                        "<h4>Side G (" + inputChairmat.sides[6] + ") + Side I (" + inputChairmat.sides[8] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8])) + "</b></h4></div>";
+                    userPrompt.append(HTMLString);
                     return;
                 }
-                bottomUserPrompt.empty();
+                if(parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8]) !== parseInt(inputChairmat.sides[0])) {
+                    userPrompt.empty();
+                    HTMLString = "<div class='error-box'>" +
+                        errorMessage +
+                        "<h4 class='error-heading'>The sum of Side G + Side I must equal the measurement of Side A</h4>" +
+                        "<h4>Currently: </h4>" +
+                        "<h4>Side G (" + inputChairmat.sides[6] + ") + Side I (" + inputChairmat.sides[8] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8])) + "</b></h4>" +
+                        "<h4>Side A = <b>" + inputChairmat.sides[0] + "</b></h4></div>";
+                    userPrompt.append(HTMLString);
+                    return;
+                }
+
+                userPrompt.empty();
                 submitButton.attr("disabled", false);
+            }
+
+            //Generates plural or singular error message for side matching
+            function generateErrorMessage(inputChairmat) {
+                let numberOfErrors = 0;
+                if(parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5]) + parseInt(inputChairmat.sides[7]) !== parseInt(inputChairmat.sides[1])) {
+                    numberOfErrors++;
+                }
+                if(parseInt(inputChairmat.sides[2]) + parseInt(inputChairmat.sides[4]) !== parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8])) {
+                    numberOfErrors++;
+                }
+                if(parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8]) !== parseInt(inputChairmat.sides[0])) {
+                    numberOfErrors++;
+                }
+                if(numberOfErrors <= 1) {
+                    return "<p>Thanks for filling out your measurements! You're almost done, but <b>before we can activate the cart button</b>, we need your help to fix an error " +
+                        "that we noticed. <b>Some of your measurements don't add up properly</b>. Please review the guidance below and update your measurements. Once you're done this " +
+                        "message will disappear and the cart button will be activated.</p>"
+                } else {
+                    return "<p>Thanks for filling out your measurements! You're almost done, but <b>before we can activate the cart button</b>, we need your help to fix a few errors that we " +
+                        "noticed. <b>Some of your measurements don't add up properly</b>. We started with the most critical error first. Please review the guidance below and update your measurements. " +
+                        "Once you've fixed this error the next one will appear below. After you fix them all the cart button will activate.</p>"
+                }
             }
 
         }, 5000);
