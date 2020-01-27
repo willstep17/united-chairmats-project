@@ -1,3 +1,4 @@
+<!-- product-template.liquid -->
 <!-- Where Custom Measurement Validation Scripts will prompt user to make required changes to measurements -->
 {% if product.tags contains 'Custom' %}
 <div id="validate-user-prompt">
@@ -5,6 +6,7 @@
 {% endif %}
 <!-- END Where Custom Measurement Validation Scripts will prompt user to make required changes to measurements -->
 
+<!-- product-template.liquid -->
 <!-- Passes product tags to front end for Custom Measurement Validation Scripts -->
 {% if product.tags contains 'Custom' %}
 <ul id="product-tags" hidden>
@@ -14,3 +16,58 @@
 </ul>
 {% endif %}
 <!-- END Passes product tags to front end for Custom Measurement Validation Scripts -->
+
+<!-- theme.scss.liquid -->
+/* Validation Project Custom CSS */
+
+#validate-user-prompt {
+width: 100%;
+}
+
+.error-box {
+border: 2px solid red;
+background-color: #f4dfdf;
+padding: 10px 10px;
+margin: 0 5px;
+}
+
+.error-heading {
+float: left;
+color: red;
+
+}
+
+.error-content {
+float: left;
+}
+
+/* END Validation Project Custom CSS */
+
+<!-- theme.liquid -->
+<!-- Custom Measurement Validation Scripts -->
+
+{% if product.tags contains 'Custom' %}
+{{ 'jquery-3.4.1.min.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if product.tags contains 'Custom' and product.tags contains 'Single Lip' %}
+{{ 'validate-single-lip.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if product.tags contains 'Custom' and product.tags contains 'Extension' %}
+{{ 'validate-extension.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if product.tags contains 'Custom' and product.tags contains 'Modular' %}
+{{ 'validate-modular.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if product.tags contains 'Custom' and product.tags contains 'Computer Table' %}
+{{ 'validate-computer-table.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if product.tags contains 'Custom' and product.tags contains 'Double Lip' %}
+{{ 'validate-double-lip.js' | asset_url | script_tag }}
+{% endif %}
+
+<!-- END Custom Measurement Validation Scripts -->
