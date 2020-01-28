@@ -24,7 +24,7 @@
                 largeAxisMax: "",
                 smallAxisMax: "",
                 sides: [
-                    "","","","","","",
+                    null, null, null, null, null, null,
                 ],
                 determineAxes: function(dimensions) {
                     if(dimensions[0] === dimensions[1]) {
