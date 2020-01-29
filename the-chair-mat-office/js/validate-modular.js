@@ -3,7 +3,7 @@
     $(document).ready( function(){
         setTimeout(function(){
 
-            const submitButton = $("#AddToCart-product-template");
+            const submitButton = $("#AddToCart");
 
             const userPrompt = $("#validate-user-prompt");
 
@@ -15,8 +15,8 @@
                 tagsArray.push(tags[i].textContent);
             }
             let tagsString = tagsArray.join("");
-            let pendingAxisDimensions = tagsString.match(/[0-9][0-9]x[0-9][0-9]/);
-            const axesDimensions = pendingAxisDimensions[0].split("x");
+            let pendingAxisDimensions = tagsString.match(/[0-9][0-9]X[0-9][0-9]/);
+            const axesDimensions = pendingAxisDimensions[0].split("X");
 
             //Initialize Chairmat Object
             const chairmat = {
@@ -24,7 +24,7 @@
                 largeAxisMax: "",
                 smallAxisMax: "",
                 sides: [
-                    "","","","","","","","","","",
+                    null, null, null, null, null, null, null, null, null, null,
                 ],
                 determineAxes: function(dimensions) {
                     if(dimensions[0] === dimensions[1]) {
@@ -105,11 +105,11 @@
 
             function evaluateChairmatDimensions(inputChairmat) {
                 for(let i=0;i<inputChairmat.sides.length;i++) {
-                    if(inputChairmat.sides[i] === "") {
+                    if(inputChairmat.sides[i] === null) {
                         return;
                     }
                 }
-                $(".product-options-errors").hide();
+                $(".required").removeClass("validation_error");
                 let errorMessage = generateErrorMessage(inputChairmat);
                 submitButton.attr("disabled", true);
                 let HTMLString = '';
@@ -121,7 +121,7 @@
                             "<p>Thanks for filling out your measurements! We noticed the overall dimensions of your mat are larger than the " +
                             "sheet size you selected.  You can either change your measurements to fit within a " + inputChairmat.smallAxisMax + " X " + inputChairmat.largeAxisMax +
                             " size sheet or, if available, use the same measurements on a larger sheet of raw material.</p>" +
-                            "<h4 class='error-heading'>Sides A and B cannot both be larger than " + inputChairmat.smallAxisMax + ".</h4><br />" +
+                            "<h3 class='error-heading'>Sides A and B cannot both be larger than " + inputChairmat.smallAxisMax + ".</h3><br />" +
                             "<p></p></div>";
                         userPrompt.append(HTMLString);
                         return;
@@ -131,12 +131,12 @@
                     userPrompt.empty();
                     HTMLString = "<div class='error-box'>" +
                         errorMessage +
-                        "<h4 class='error-heading'>The sum of Side D + Side F must equal the measurement of Side H + Side J</h4>" +
-                        "<h4>Currently: </h4>" +
-                        "<h4>Side D (" + inputChairmat.sides[3] + ") + Side F (" + inputChairmat.sides[5] + ") = <b>" +
-                        (parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5])) + "</b></h4>" +
-                        "<h4>Side H (" + inputChairmat.sides[7] + ") + Side J (" + inputChairmat.sides[9] + ") = <b>" +
-                        (parseInt(inputChairmat.sides[7]) + parseInt(inputChairmat.sides[9])) + "</b></h4></div>";
+                        "<h3 class='error-heading'>The sum of Side D + Side F must equal the measurement of Side H + Side J</h3>" +
+                        "<h3>Currently: </h3>" +
+                        "<h3>Side D (" + inputChairmat.sides[3] + ") + Side F (" + inputChairmat.sides[5] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[3]) + parseInt(inputChairmat.sides[5])) + "</b></h3>" +
+                        "<h3>Side H (" + inputChairmat.sides[7] + ") + Side J (" + inputChairmat.sides[9] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[7]) + parseInt(inputChairmat.sides[9])) + "</b></h3></div>";
                     userPrompt.append(HTMLString);
                     return;
                 }
@@ -144,11 +144,11 @@
                     userPrompt.empty();
                     HTMLString = "<div class='error-box'>" +
                         errorMessage +
-                        "<h4 class='error-heading'>The sum of Side H + Side J must equal the measurement of Side A</h4>" +
-                        "<h4>Currently: </h4>" +
-                        "<h4>Side H (" + inputChairmat.sides[7] + ") + Side J (" + inputChairmat.sides[9] + ") = <b>" +
-                        (parseInt(inputChairmat.sides[7]) + parseInt(inputChairmat.sides[9])) + "</b></h4>" +
-                        "<h4>Side A = <b>" + inputChairmat.sides[0] + "</b></h4></div>";
+                        "<h3 class='error-heading'>The sum of Side H + Side J must equal the measurement of Side A</h3>" +
+                        "<h3>Currently: </h3>" +
+                        "<h3>Side H (" + inputChairmat.sides[7] + ") + Side J (" + inputChairmat.sides[9] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[7]) + parseInt(inputChairmat.sides[9])) + "</b></h3>" +
+                        "<h3>Side A = <b>" + inputChairmat.sides[0] + "</b></h3></div>";
                     userPrompt.append(HTMLString);
                     return;
                 }
@@ -156,12 +156,12 @@
                     userPrompt.empty();
                     HTMLString = "<div class='error-box'>" +
                         errorMessage +
-                        "<h4 class='error-heading'>The sum of Side C + Side E must equal the measurement of Side G + Side I</h4>" +
-                        "<h4>Currently: </h4>" +
-                        "<h4>Side C (" + inputChairmat.sides[2] + ") + Side E (" + inputChairmat.sides[4] + ") = <b>" +
-                        (parseInt(inputChairmat.sides[2]) + parseInt(inputChairmat.sides[4])) + "</b></h4>" +
-                        "<h4>Side G (" + inputChairmat.sides[6] + ") + Side I (" + inputChairmat.sides[8] + ") = <b>" +
-                        (parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8])) + "</b></h4></div>";
+                        "<h3 class='error-heading'>The sum of Side C + Side E must equal the measurement of Side G + Side I</h3>" +
+                        "<h3>Currently: </h3>" +
+                        "<h3>Side C (" + inputChairmat.sides[2] + ") + Side E (" + inputChairmat.sides[4] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[2]) + parseInt(inputChairmat.sides[4])) + "</b></h3>" +
+                        "<h3>Side G (" + inputChairmat.sides[6] + ") + Side I (" + inputChairmat.sides[8] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8])) + "</b></h3></div>";
                     userPrompt.append(HTMLString);
                     return;
                 }
@@ -169,11 +169,11 @@
                     userPrompt.empty();
                     HTMLString = "<div class='error-box'>" +
                         errorMessage +
-                        "<h4 class='error-heading'>The sum of Side G + Side I must equal the measurement of Side B</h4>" +
-                        "<h4>Currently: </h4>" +
-                        "<h4>Side G (" + inputChairmat.sides[6] + ") + Side I (" + inputChairmat.sides[8] + ") = <b>" +
-                        (parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8])) + "</b></h4>" +
-                        "<h4>Side B = <b>" + inputChairmat.sides[1] + "</b></h4></div>";
+                        "<h3 class='error-heading'>The sum of Side G + Side I must equal the measurement of Side B</h3>" +
+                        "<h3>Currently: </h3>" +
+                        "<h3>Side G (" + inputChairmat.sides[6] + ") + Side I (" + inputChairmat.sides[8] + ") = <b>" +
+                        (parseInt(inputChairmat.sides[6]) + parseInt(inputChairmat.sides[8])) + "</b></h3>" +
+                        "<h3>Side B = <b>" + inputChairmat.sides[1] + "</b></h3></div>";
                     userPrompt.append(HTMLString);
                     return;
                 }
