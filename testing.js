@@ -23,7 +23,7 @@ const chairmat = {
             this.smallAxisMax = dimensions[0];
         }
     },
-}
+};
 
 chairmat.determineAxes(axesDimensions);
 
