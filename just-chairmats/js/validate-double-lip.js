@@ -195,9 +195,9 @@
                         errorMessage +
                         "<h4 class='error-heading'>The sum of Side K + Side I + Side G must equal the measurement of Side A</h4>" +
                         "<h4>Currently: </h4>" +
-                        "<h4>Side D (" + inputChairmat.sides[10] + ") + Side F (" + inputChairmat.sides[8] + ") + Side H (" + inputChairmat.sides[6] + ") = <b>" +
+                        "<h4>Side K (" + inputChairmat.sides[10] + ") + Side I (" + inputChairmat.sides[8] + ") + Side G (" + inputChairmat.sides[6] + ") = <b>" +
                         (parseInt(inputChairmat.sides[10]) + parseInt(inputChairmat.sides[8]) + parseInt(inputChairmat.sides[6])) + "</b></h4>" +
-                        "<h4>Side B = <b>" + inputChairmat.sides[0] + "</b></h4></div>";
+                        "<h4>Side A = <b>" + inputChairmat.sides[0] + "</b></h4></div>";
                     userPrompt.append(HTMLString);
                     return;
                 }
@@ -232,6 +232,6 @@
                 }
             }
 
-        }, 5000);
+        }, 6000);
     });
 })();
