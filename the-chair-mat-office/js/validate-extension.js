@@ -15,7 +15,7 @@
                 tagsArray.push(tags[i].textContent);
             }
             let tagsString = tagsArray.join("");
-            let pendingAxisDimensions = tagsString.match(/[0-9][0-9]X[0-9][0-9]/);
+            let pendingAxisDimensions = tagsString.match(/[0-9][0-9]X[0-9][0-9]/i);
             const axesDimensions = pendingAxisDimensions[0].split("X");
 
             //Initialize Chairmat Object
